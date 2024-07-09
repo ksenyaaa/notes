@@ -21,8 +21,6 @@ class Notification (private val context: Context) {
         val notificationManager: NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val vibrations = arrayOf(100L, 200L).toLongArray()
-
         val audioAttributes: AudioAttributes = AudioAttributes.Builder()
             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
             .setUsage(AudioAttributes.USAGE_NOTIFICATION)
@@ -60,11 +58,6 @@ class Notification (private val context: Context) {
             }.also {
                 notificationManager.createNotificationChannel(it)
             }
-        } else {
-            builder
-                .setVibrate(vibrations)
-                .setSound(sound)
-                .setLights(Color.BLUE, 100, 500)
         }
 
 

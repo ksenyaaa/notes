@@ -19,3 +19,5 @@ class TrackerFragment: Fragment(R.layout.fragment_tracker) {
         binding = null
     }
 }
+
+
