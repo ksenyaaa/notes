@@ -30,18 +30,11 @@ class Notification (private val context: Context) {
         val sound: Uri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.notify)
 
         val intent = Intent(context, MainActivity::class.java)
-        val pending = if (id == null) {
-            NavDeepLinkBuilder(context)
-                .setGraph(R.navigation.main_graf)
-                .setDestination(R.id.detailedScreenFragment)
-                .setArguments(bundleOf("ID" to id))
-                .createPendingIntent()
-        } else {
-            PendingIntent.getActivity(
-                context, 100, intent,
-                PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
-            )
-        }
+        val pending = PendingIntent.getActivity(
+            context, 100, intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
+        )
+
 
 
         val builder: NotificationCompat.Builder =

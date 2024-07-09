@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private var controller: NavController? = null
     private var binding: ActivityMainBinding? = null
+    private var notification: Notification? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +32,13 @@ class MainActivity : AppCompatActivity() {
         controller?.let { navController ->
             binding?.bottomNav?.setupWithNavController(navController)
         }
-
+        notification = Notification(this)
+        notification?.showNotification(title = "hi", text = "muy", id = 1)
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        notification = null
     }
 
     override fun onBackPressed() {
