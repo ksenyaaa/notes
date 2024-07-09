@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="default_notification_channel_id" translatable="false">qwerty</string>
+    <string name="default_notification_channel_name">Hello</string>
+
+
 </resources>
