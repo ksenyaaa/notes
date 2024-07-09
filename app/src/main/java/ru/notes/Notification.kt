@@ -14,10 +14,12 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toBitmapOrNull
+import androidx.core.os.bundleOf
+import androidx.navigation.NavDeepLinkBuilder
 
 class Notification (private val context: Context) {
 
-    fun showNotification(title: String, text: String) {
+    fun showNotification(title: String, text: String, id: Int?) {
         val notificationManager: NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -28,10 +30,19 @@ class Notification (private val context: Context) {
         val sound: Uri = Uri.parse("android.resource://" + context.packageName + "/" + R.raw.notify)
 
         val intent = Intent(context, MainActivity::class.java)
-        val pending = PendingIntent.getActivity(
-            context, 100, intent,
-            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
-        )
+        val pending = if (id == null) {
+            NavDeepLinkBuilder(context)
+                .setGraph(R.navigation.main_graf)
+                .setDestination(R.id.detailedScreenFragment)
+                .setArguments(bundleOf("ID" to id))
+                .createPendingIntent()
+        } else {
+            PendingIntent.getActivity(
+                context, 100, intent,
+                PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE,
+            )
+        }
+
 
         val builder: NotificationCompat.Builder =
             NotificationCompat.Builder(context, context.getString(R.string.default_notification_channel_id))
