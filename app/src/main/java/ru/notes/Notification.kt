@@ -45,21 +45,18 @@ class Notification (private val context: Context) {
                 .setVisibility(NotificationCompat.VISIBILITY_PRIVATE)
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)run {
-            NotificationChannel(
-                context.getString(R.string.default_notification_channel_id),
-                context.getString(R.string.default_notification_channel_name),
-                NotificationManager.IMPORTANCE_HIGH
-            ).apply {
+        NotificationChannel(
+            context.getString(R.string.default_notification_channel_id),
+            context.getString(R.string.default_notification_channel_name),
+            NotificationManager.IMPORTANCE_HIGH
+        ).apply {
+            setSound(sound, audioAttributes)
 
-                setSound(sound, audioAttributes)
-                vibrationPattern = arrayOf(100L, 200L).toLongArray()
-                lightColor = Color.BLUE
-            }.also {
-                notificationManager.createNotificationChannel(it)
-            }
+            vibrationPattern = arrayOf(100L, 200L).toLongArray()
+            lightColor = Color.BLUE
+        }.also {
+            notificationManager.createNotificationChannel(it)
         }
-
 
         notificationManager.notify(2132, builder.build())
     }
