@@ -11,8 +11,8 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="413dp"
-        android:layout_height="728dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#ABE7ED"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
@@ -31,26 +31,23 @@
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvlist"
-        android:layout_width="414dp"
-        android:layout_height="603dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        app:layout_constraintVertical_bias="0.0"
         tools:itemCount="7">
-
     </androidx.recyclerview.widget.RecyclerView>
 
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="61dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/Calendar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 

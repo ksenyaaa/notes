@@ -16,4 +16,8 @@
         android:id="@+id/mainScreenFragment"
         android:name="ru.notes.MainScreenFragment"
         android:label="MainScreenFragment" />
+    <fragment
+        android:id="@+id/habitFragment"
+        android:name="ru.notes.HabitFragment"
+        android:label="HabitFragment" />
 </navigation>

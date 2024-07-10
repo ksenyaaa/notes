@@ -5,7 +5,7 @@
         android:icon="@drawable/baseline_checklist_24"
         android:title="Main" />
     <item
-        android:id="@+id/trackerFragment"
+        android:id="@+id/habitFragment"
         android:icon="@drawable/baseline_check_24"
         android:title="Tracker" />
 
