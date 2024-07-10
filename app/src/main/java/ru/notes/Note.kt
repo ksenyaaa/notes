@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 data class Note(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val time: Int,
     val text: String,
-    val timestamp: Int,
+    val remindAt: Int,
 )
