@@ -12,7 +12,13 @@ class ReminderBroadcast : BroadcastReceiver() {
             val text = intent?.extras?.getString("ARG2")
             val id = intent?.extras?.getInt("ARG3")
             val notification = Notification(it)
-            notification.showNotification(title.toString(), text.toString(), id)
+            notification.showNotification(
+                if (title.isNullOrEmpty()) "Загляни в приложение" else title,
+                if (text.isNullOrEmpty()) "Не пропусти свои планы" else text,
+                id
+            )
         }
     }
 }
+
+

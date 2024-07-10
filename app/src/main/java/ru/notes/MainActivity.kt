@@ -1,35 +1,15 @@
 package ru.notes
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.graphics.Color
-import android.media.AudioAttributes
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import ru.notes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var controller: NavController? = null
     private var binding: ActivityMainBinding? = null
-    private var notification: Notification? = null
-
-    private var adapter: NoteAdapter? = null
-
-//    private val numColums = 2
-
-//    private var setUpViews(){
-//        val gridLayoutManager = GridLayoutManager(aplicationContext, numColums)
-//        gridLayoutManager.orientation = RecyclerView.VERTICAL
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +22,6 @@ class MainActivity : AppCompatActivity() {
         controller?.let { navController ->
             binding?.bottomNav?.setupWithNavController(navController)
         }
-        notification = Notification(this)
-        notification?.showNotification(title = "hi", text = "muy", id = 1)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        notification = null
     }
 
     override fun onBackPressed() {

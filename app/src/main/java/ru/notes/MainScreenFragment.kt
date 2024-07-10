@@ -9,7 +9,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import kotlinx.coroutines.runBlocking
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.notes.databinding.FragmentMainScreenBinding
 import java.util.Calendar
 
@@ -29,14 +32,24 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainScreenBinding.bind(view)
+        setReminder(null, "", "", 1)
         noteDao.getAllNotes().observe(viewLifecycleOwner) { notes ->
             if (notes.isEmpty()) {
-                noteAdapter = NoteAdapter(emptyNotes)
-                runBlocking { emptyNotes.forEach { noteDao.insert(it) } }
+                noteAdapter = NoteAdapter(emptyNotes, ::onItemClick)
+                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                    emptyNotes.forEach { noteDao.insert(it) }
+                }
             } else {
-                noteAdapter = NoteAdapter(notes)
+                noteAdapter = NoteAdapter(notes, ::onItemClick)
             }
             binding?.run { rvlist.adapter = noteAdapter }
+            binding?.run {
+                fab.setOnClickListener {
+                    DatePickerFragment().show(
+                        childFragmentManager, ""
+                    )
+                }
+            }
         }
     }
 
@@ -45,7 +58,14 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         binding = null
     }
 
-    private fun showDatePicker(title: String, text: String, id: Int) {
+    private fun onItemClick(id: Int) {
+        findNavController().navigate(
+            R.id.detailedScreenFragment,
+            DetailedScreenFragment.bundle(id)
+        )
+    }
+
+    fun showDatePicker(title: String, text: String, id: Int) {
         val currentDateTime = Calendar.getInstance()
         val startYear = currentDateTime.get(Calendar.YEAR)
         val startMonth = currentDateTime.get(Calendar.MONTH)
@@ -62,7 +82,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         }, startYear, startMonth, startDay).show()
     }
 
-    private fun setReminder(remindAt: Long, title: String, text: String, id: Int) {
+    fun setReminder(remindAt: Long?, title: String, text: String, id: Int) {
         val intent = Intent(requireContext(), ReminderBroadcast::class.java).apply {
             putExtra("ARG1", title)
             putExtra("ARG2", text)
@@ -72,13 +92,23 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
             PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE)
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        alarmManager.set(
-            AlarmManager.RTC_WAKEUP,
-            remindAt,
-            pendingIntent,
-        )
-    }
+        println(remindAt)
 
+        if (remindAt == null) {
+            alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                60000,
+                60000,
+                pendingIntent,
+            )
+        } else {
+            alarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                remindAt,
+                pendingIntent,
+            )
+        }
+    }
     private companion object {
         val emptyNotes = listOf(
             Note(
