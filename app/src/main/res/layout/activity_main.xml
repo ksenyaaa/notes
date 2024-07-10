@@ -34,8 +34,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvlist"
-        android:layout_width="208dp"
-        android:layout_height="601dp"
+        android:layout_width="414dp"
+        android:layout_height="603dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -45,18 +45,6 @@
         tools:itemCount="7">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvlist1"
-        android:layout_width="202dp"
-        android:layout_height="601dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/rvlist"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
-        app:layout_constraintVertical_bias="1.0"
-        tools:itemCount="7"/>
 
     <ImageButton
         android:id="@+id/imageButton2"
