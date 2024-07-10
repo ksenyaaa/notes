@@ -19,15 +19,6 @@ class MainScreenFragment: Fragment(R.layout.fragment_main_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainScreenBinding.bind(view)
-
-        binding?.etEditText?.setOnClickListener {
-            showDatePicker(
-                title = "note",
-                text = "hhh",
-                id = 1,
-                )
-        }
-
     }
 
 

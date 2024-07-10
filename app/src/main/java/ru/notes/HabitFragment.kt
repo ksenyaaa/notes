@@ -1,13 +1,9 @@
-package ru.notesimport
+package ru.notes
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.notes.HabitAdapter
-import ru.notes.HabitDao
-import ru.notes.HabitDatabase
-import ru.notes.R
 
 class HabitFragment : Fragment(R.layout.fragment_habit) {
 

@@ -11,7 +11,7 @@ class HabitHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var descriptionView: TextView? = null
 
     init {
-        nameView = itemView.findViewById(R.id.item_note)
+        nameView = itemView.findViewById(R.id.tvName)
         descriptionView = itemView.findViewById(R.id.detailedScreenFragment)
     }
 
