@@ -32,7 +32,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainScreenBinding.bind(view)
-        setReminder(null, "", "", 1)
+//        setReminder(null, "", "", 1)
         noteDao.getAllNotes().observe(viewLifecycleOwner) { notes ->
             if (notes.isEmpty()) {
                 noteAdapter = NoteAdapter(emptyNotes, ::onItemClick)
@@ -99,7 +99,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
                 60000,
-                60000,
+                360000,
                 pendingIntent,
             )
         } else {
@@ -155,4 +155,5 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         )
     }
 }
+
 

@@ -3,17 +3,26 @@ package ru.notes
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.notes.databinding.ItemHabitBinding
 
-class HabitAdapter(private val habits: List<Habit>) : RecyclerView.Adapter<HabitHolder>() {
+class HabitAdapter(
+    private val habits: List<Habit>,
+    private val onItemClick: (Habit) -> Unit,
+    private val onLongClick: (Habit) -> Unit,
+) : RecyclerView.Adapter<HabitHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return HabitHolder(inflater, parent)
+        return HabitHolder(
+            ItemHabitBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false,
+            ), onItemClick, onLongClick
+        )
     }
 
     override fun onBindViewHolder(holder: HabitHolder, position: Int) {
-        val habit: Habit = habits[position]
-        holder.bind(habit)
+        holder.bind(habits[position])
     }
 
     override fun getItemCount(): Int = habits.size

@@ -9,10 +9,6 @@
         android:name="ru.notes.DetailedScreenFragment"
         android:label="DetailedScreenFragment" />
     <fragment
-        android:id="@+id/trackerFragment"
-        android:name="ru.notes.TrackerFragment"
-        android:label="TrackerFragment" />
-    <fragment
         android:id="@+id/mainScreenFragment"
         android:name="ru.notes.MainScreenFragment"
         android:label="MainScreenFragment" />
