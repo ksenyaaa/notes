@@ -94,6 +94,7 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
 
         println(remindAt)
 
+
         if (remindAt == null) {
             alarmManager.setRepeating(
                 AlarmManager.RTC_WAKEUP,
@@ -154,3 +155,4 @@ class MainScreenFragment : Fragment(R.layout.fragment_main_screen) {
         )
     }
 }
+

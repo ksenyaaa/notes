@@ -12,12 +12,16 @@ class TrackerFragment: Fragment(R.layout.fragment_tracker) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTrackerBinding.bind(view)
+
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
+
 }
 
 

@@ -8,9 +8,9 @@ class ReminderBroadcast : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         context?.let {
-            val title = intent?.extras?.getString("ARG1")
-            val text = intent?.extras?.getString("ARG2")
-            val id = intent?.extras?.getInt("ARG3")
+            val title = intent?.getStringExtra("ARG1")
+            val text = intent?.getStringExtra("ARG2")
+            val id = intent?.getIntExtra("ARG3", 0)
             val notification = Notification(it)
             notification.showNotification(
                 if (title.isNullOrEmpty()) "Загляни в приложение" else title,
@@ -19,6 +19,7 @@ class ReminderBroadcast : BroadcastReceiver() {
             )
         }
     }
+
 }
 
 
